@@ -18,6 +18,13 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 Launches the test runner in the interactive watch mode.\
 See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
+### `npm run storybook`
+
+Runs components storybook
+Open [http://localhost:6006/](http://localhost:6006/)
+
+Note: Not compatible with npm8 at the time of installation. Uses legacy npm7 setup.
+
 ## Description
 
 ## Stack
