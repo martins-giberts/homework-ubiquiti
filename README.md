@@ -7,7 +7,9 @@ Homework task for Ubiquiti based on Create React App (CRA) with Redux and Typesc
 ## Setup
 
 - Git clone for example SSH `git clone git@github.com:martins-giberts/homework-ubiquiti.git && cd homework-ubiquiti`
-- Open `homework-ubiquiti` on your favorite code editor or terminal.
+- Open `homework-ubiquiti` on your favorite code editor
+- Copy [.env.example](./.env.example) to `.env`
+- Update `REACT_APP_API_ENDPOINT` and `REACT_APP_ICON_URL`
 
 ## Preconditions
 
