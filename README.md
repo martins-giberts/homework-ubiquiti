@@ -4,6 +4,12 @@ Homework task for Ubiquiti based on Create React App (CRA) with Redux and Typesc
 
 - [Requirements](./docs/homework-requirements.md)
 
+## Preconditions
+
+- Node v16 or newer
+- npm v8.15 or newer
+- `npm install`
+
 ## Run the App
 
 ### `npm start`
