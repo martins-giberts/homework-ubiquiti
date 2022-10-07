@@ -46,3 +46,4 @@ Note: Not compatible with npm8 at the time of installation. Uses legacy npm7 set
 - [Styled Components](https://styled-components.com/)
 - [StoryBook](https://storybook.js.org/)
 - [Google Fonts - Lato](https://fonts.google.com/specimen/Lato)
+- [Folder Templates](https://marketplace.visualstudio.com/items?itemName=Huuums.vscode-fast-folder-structure)
