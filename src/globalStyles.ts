@@ -1,11 +1,12 @@
 import { createGlobalStyle } from "styled-components";
+import { tokens } from "./tokens";
 
 export const GlobalStyle = createGlobalStyle`
-  @import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap');
+  @import url(tokens.fontLibraryImportUrlLato);
 
   body {
-    font-family: 'Lato', sans-serif;
-    font-size: 16px;
+    font-family: ${tokens.fontFamily};
+    font-size: ${tokens.defaultFontSizePx};
   }
 
   * {
