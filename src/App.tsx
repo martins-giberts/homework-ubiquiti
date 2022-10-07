@@ -3,26 +3,29 @@ import logo from "./logo.svg";
 import { Counter } from "./features/counter/Counter";
 import "./App.css";
 import { useGetProductsQuery } from "./services/api";
+import { Wrapper } from "./components/Wrapper";
 
 function App() {
   const { error, isLoading, data } = useGetProductsQuery();
 
   return (
-    <div className="App">
-      {isLoading ? "LOADING..." : "DONE!"}
-      {error ? JSON.stringify(error) : ""}
-      {data?.devices.map((device) => (
-        <div key={`${device.product.name}_${device.shortnames.join("-")}`}>
-          <img
-            src={`${process.env.REACT_APP_ICON_URL}/${device.icon.id}_25x25.png`}
-            alt={`product ${device.product.name} icon`}
-          />
-          <span>{device.line.name}</span> | <span>{device.product.name}</span>
-        </div>
-      ))}
+    <Wrapper>
+      <div className="App">
+        {isLoading ? "LOADING..." : "DONE!"}
+        {error ? JSON.stringify(error) : ""}
+        {data?.devices.map((device) => (
+          <div key={`${device.product.name}_${device.shortnames.join("-")}`}>
+            <img
+              src={`${process.env.REACT_APP_ICON_URL}/${device.icon.id}_25x25.png`}
+              alt={`product ${device.product.name} icon`}
+            />
+            <span>{device.line.name}</span> | <span>{device.product.name}</span>
+          </div>
+        ))}
 
-      <Demo />
-    </div>
+        <Demo />
+      </div>
+    </Wrapper>
   );
 }
 

@@ -38,6 +38,11 @@ Open [http://localhost:6006/](http://localhost:6006/)
 
 Note: Not compatible with npm8 at the time of installation. Uses legacy npm7 setup.
 
+### [Tokens](./src/tokens.ts)
+
+All tokens used for design or client-side configuration.
+In proper setup this would work as a central reference from externally imported tokens Figma, Zeroheight, others
+
 ## Description
 
 ## Stack
