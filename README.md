@@ -43,3 +43,6 @@ Note: Not compatible with npm8 at the time of installation. Uses legacy npm7 set
 ## Stack
 
 - [Create React App](./docs/create-react-app.md)
+- [Styled Components](https://styled-components.com/)
+- [StoryBook](https://storybook.js.org/)
+- [Google Fonts - Lato](https://fonts.google.com/specimen/Lato)
