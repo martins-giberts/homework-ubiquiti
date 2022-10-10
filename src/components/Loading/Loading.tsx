@@ -1,9 +1,12 @@
 import styled from "styled-components";
 import { LoadingText } from "./LoadingText";
+import { Text, TextTypes } from "../Text";
 
 export const Loading: React.FC = () => (
   <Container>
-    <LoadingText>Loading...</LoadingText>
+    <LoadingText>
+      <Text textType={TextTypes.Title}>Loading...</Text>
+    </LoadingText>
   </Container>
 );
 

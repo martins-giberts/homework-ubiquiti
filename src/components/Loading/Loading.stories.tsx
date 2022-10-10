@@ -12,7 +12,7 @@ const Template: ComponentStory<typeof Loading> = (args) => (
 );
 
 const TemplateWithWrapper: ComponentStory<typeof Loading> = (args) => (
-  <Wrapper type={WrapperTypes.FullScreen}>
+  <Wrapper wrapperType={WrapperTypes.FullScreen}>
     <Loading {...args} />
   </Wrapper>
 );

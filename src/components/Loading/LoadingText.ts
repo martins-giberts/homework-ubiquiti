@@ -26,7 +26,6 @@ export const LoadingText = styled.span`
   color: transparent;
   background-clip: text;
   display: inline-block;
-  font-size: 1.5em;
 
   @keyframes placeHolderShimmer {
     0% {

@@ -11,7 +11,7 @@ function App() {
 
   return (
     <>
-      <Wrapper type={isLoading ? WrapperTypes.FullScreen : undefined}>
+      <Wrapper wrapperType={isLoading ? WrapperTypes.FullScreen : undefined}>
         {isLoading ? <Loading /> : "DONE!"}
         {error ? JSON.stringify(error) : ""}
         {data?.devices.map((device) => (

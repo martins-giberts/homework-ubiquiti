@@ -8,12 +8,12 @@ export enum WrapperTypes {
 }
 
 export type WrapperProps = {
-  type?: WrapperTypes;
+  wrapperType?: WrapperTypes;
 };
 
 export const Wrapper: React.FC<PropsWithChildren<WrapperProps>> = ({
   children,
-  type = WrapperTypes.Default,
+  wrapperType: type = WrapperTypes.Default,
 }) => (
   <Container type={type} className={type}>
     {children}

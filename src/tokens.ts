@@ -3,6 +3,9 @@ const typography = {
     "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap",
   defaultFontSizePx: "16px",
   fontFamily: `'Lato', sans-serif`,
+  fontSizeNormalEm: "1em",
+  fontSizeTitleEm: "2em",
+  lineHeightEm: "1.5em",
 };
 
 const mediaTokens = {
