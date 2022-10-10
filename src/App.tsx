@@ -6,6 +6,7 @@ import { useGetProductsQuery } from "./services/api";
 import { Wrapper, WrapperTypes } from "./components/Wrapper";
 import { Loading } from "./components/Loading";
 import { ErrorMessage } from "./components/ErrorMessage";
+import { ProductsGrid } from "./components/ProductsGrid";
 
 function App() {
   const { error, isLoading, data } = useGetProductsQuery();
@@ -17,15 +18,18 @@ function App() {
       >
         {!error && isLoading && <Loading />}
         {error && <ErrorMessage error={error} />}
-        {data?.devices.map((device) => (
-          <div key={`${device.product.name}_${device.shortnames.join("-")}`}>
-            <img
-              src={`${process.env.REACT_APP_ICON_URL}/${device.icon.id}_25x25.png`}
-              alt={`product ${device.product.name} icon`}
-            />
-            <span>{device.line.name}</span> | <span>{device.product.name}</span>
-          </div>
-        ))}
+        <ProductsGrid>
+          {data?.devices.map((device) => (
+            <div key={`${device.product.name}_${device.shortnames.join("-")}`}>
+              <img
+                src={`${process.env.REACT_APP_ICON_URL}/${device.icon.id}_25x25.png`}
+                alt={`product ${device.product.name} icon`}
+              />
+              <span>{device.line.name}</span> |{" "}
+              <span>{device.product.name}</span>
+            </div>
+          ))}
+        </ProductsGrid>
       </Wrapper>
       <div className="App">
         <Demo />
