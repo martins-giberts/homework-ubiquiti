@@ -3,15 +3,16 @@ import logo from "./logo.svg";
 import { Counter } from "./features/counter/Counter";
 import "./App.css";
 import { useGetProductsQuery } from "./services/api";
-import { Wrapper } from "./components/Wrapper";
+import { Wrapper, WrapperTypes } from "./components/Wrapper";
+import { Loading } from "./components/Loading";
 
 function App() {
   const { error, isLoading, data } = useGetProductsQuery();
 
   return (
-    <Wrapper>
-      <div className="App">
-        {isLoading ? "LOADING..." : "DONE!"}
+    <>
+      <Wrapper type={isLoading ? WrapperTypes.FullScreen : undefined}>
+        {isLoading ? <Loading /> : "DONE!"}
         {error ? JSON.stringify(error) : ""}
         {data?.devices.map((device) => (
           <div key={`${device.product.name}_${device.shortnames.join("-")}`}>
@@ -22,10 +23,11 @@ function App() {
             <span>{device.line.name}</span> | <span>{device.product.name}</span>
           </div>
         ))}
-
+      </Wrapper>
+      <div className="App">
         <Demo />
       </div>
-    </Wrapper>
+    </>
   );
 }
 

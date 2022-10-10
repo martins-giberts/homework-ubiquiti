@@ -43,6 +43,7 @@ const spacingPx = {
 const colors = {
   colorUiLightBlue: "#00a0df",
   colorUiDarkBlue: "#003656",
+  colorUiLightGrey: "#f6f6f8",
   colorUiGrey: "#7f7f7f",
   colorWhite: "#fff",
   colorBlack: "#000",

@@ -2,15 +2,26 @@ import { PropsWithChildren } from "react";
 import styled from "styled-components";
 import { tokens } from "../../tokens";
 
-export const Wrapper: React.FC<PropsWithChildren> = ({ children }) => (
-  <Container>{children}</Container>
-);
+export enum WrapperTypes {
+  Default,
+  FullScreen,
+}
 
-const Container = styled.div`
-  height: 100%;
+export type WrapperProps = {
+  type?: WrapperTypes;
+};
+
+export const Wrapper: React.FC<PropsWithChildren<WrapperProps>> = ({
+  children,
+  type = WrapperTypes.Default,
+}) => <Container type={type}>{children}</Container>;
+
+const Container = styled.div<{ type?: WrapperTypes }>`
+  height: ${({ type }) =>
+    type === WrapperTypes.FullScreen ? "100vh" : "auto"};
   min-width: ${tokens.mobileWidthPx};
   max-width: ${tokens.desktopLargeWidthPx};
-  min-height: 100vw;
+  min-height: 100vh;
   margin: 0 auto;
   padding: 0 ${tokens.spacingSmallPx};
 
