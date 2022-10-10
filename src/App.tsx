@@ -5,15 +5,18 @@ import "./App.css";
 import { useGetProductsQuery } from "./services/api";
 import { Wrapper, WrapperTypes } from "./components/Wrapper";
 import { Loading } from "./components/Loading";
+import { ErrorMessage } from "./components/ErrorMessage";
 
 function App() {
   const { error, isLoading, data } = useGetProductsQuery();
 
   return (
     <>
-      <Wrapper wrapperType={isLoading ? WrapperTypes.FullScreen : undefined}>
-        {isLoading ? <Loading /> : "DONE!"}
-        {error ? JSON.stringify(error) : ""}
+      <Wrapper
+        wrapperType={isLoading || error ? WrapperTypes.FullScreen : undefined}
+      >
+        {!error && isLoading && <Loading />}
+        {error && <ErrorMessage error={error} />}
         {data?.devices.map((device) => (
           <div key={`${device.product.name}_${device.shortnames.join("-")}`}>
             <img

@@ -34,6 +34,7 @@ const spacing = {
   spacingMedium: 16,
   spacingLarge: 24,
   spacingExtraLarge: 32,
+  spacingBorderRadius: 10,
 };
 
 const spacingPx = {
@@ -41,6 +42,7 @@ const spacingPx = {
   spacingMediumPx: `${spacing.spacingMedium}px`,
   spacingLargePx: `${spacing.spacingLarge}px`,
   spacingExtraLargePx: `${spacing.spacingExtraLarge}px`,
+  spacingBorderRadiusPx: `${spacing.spacingBorderRadius}px`,
 };
 
 const colors = {

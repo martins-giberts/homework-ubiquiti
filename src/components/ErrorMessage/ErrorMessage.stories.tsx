@@ -1,4 +1,5 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
+import { Wrapper, WrapperTypes } from "../Wrapper";
 import { ErrorMessage } from "./ErrorMessage";
 
 export default {
@@ -10,7 +11,18 @@ const Template: ComponentStory<typeof ErrorMessage> = (args) => (
   <ErrorMessage {...args} />
 );
 
+const TemplateWithWrapper: ComponentStory<typeof ErrorMessage> = (args) => (
+  <Wrapper wrapperType={WrapperTypes.FullScreen}>
+    <ErrorMessage {...args} />
+  </Wrapper>
+);
+
 export const Default = Template.bind({});
 Default.args = {
-  children: "error message",
+  error: { status: "FETCH_ERROR", error: "TypeError: Failed to fetch" },
+};
+
+export const WithWrapper = TemplateWithWrapper.bind({});
+WithWrapper.args = {
+  error: { status: "FETCH_ERROR", error: "TypeError: Failed to fetch" },
 };
