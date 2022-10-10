@@ -8,6 +8,6 @@ describe("ErrorMessage", () => {
         error={{ status: "FETCH_ERROR", error: "TypeError: Failed to fetch" }}
       ></ErrorMessage>
     );
-    expect(screen.getByText("ErrorMessage")).toBeInTheDocument();
+    expect(screen.getByText("TypeError: Failed to fetch")).toBeInTheDocument();
   });
 });
