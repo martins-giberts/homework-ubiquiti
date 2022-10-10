@@ -5,7 +5,8 @@ import { ProductsGrid } from "./ProductsGrid";
 
 const TemplateCard = styled.div`
   background-color: ${tokens.colorUiLightBlue};
-  padding: 2px 10px;
+  padding: 10px 15px;
+  color: ${tokens.colorWhite};
 `;
 
 export default {
