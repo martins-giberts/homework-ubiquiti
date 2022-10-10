@@ -3,8 +3,8 @@ import styled from "styled-components";
 import { tokens } from "../../tokens";
 
 export enum WrapperTypes {
-  Default,
-  FullScreen,
+  Default = "type-default",
+  FullScreen = "type-fullscreen",
 }
 
 export type WrapperProps = {
@@ -14,7 +14,11 @@ export type WrapperProps = {
 export const Wrapper: React.FC<PropsWithChildren<WrapperProps>> = ({
   children,
   type = WrapperTypes.Default,
-}) => <Container type={type}>{children}</Container>;
+}) => (
+  <Container type={type} className={type}>
+    {children}
+  </Container>
+);
 
 const Container = styled.div<{ type?: WrapperTypes }>`
   height: ${({ type }) =>

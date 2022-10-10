@@ -93,7 +93,7 @@
       "import { <FTName> } from \"./<FTName>\";",
       "",
       "describe(\"<FTName>\", () => {",
-      "  it(\"renders welcome message\", () => {",
+      "  it(\"renders component\", () => {",
       "    render(<<FTName> />);",
       "    expect(screen.getByText(\"<FTName>\")).toBeInTheDocument();",
       "  });",
