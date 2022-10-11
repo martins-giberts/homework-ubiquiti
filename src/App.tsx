@@ -17,13 +17,17 @@ function App() {
   };
 
   const filterDevice = (device: Device) => {
-    const sanitizeQuery = searchQuery.trim().toLowerCase();
+    const sanitizeQuery = searchQuery
+      .replace(/[\\.+*?^$[\](){}/'#:!=|]/gi, "\\$&")
+      .trim()
+      .toLowerCase();
+
     if (!sanitizeQuery) {
       return true;
     }
 
     // Get words
-    const keys = device.product.name.toLowerCase().split(" ");
+    const keys = getDeviceKeys(device);
 
     if (
       keys
@@ -122,3 +126,53 @@ const Demo: React.FC = () => (
     </span>
   </header>
 );
+
+const getDeviceKeys = (device: Device): string[] => {
+  const deviceKeyWords = [];
+  // line
+  deviceKeyWords.push(device.line.name);
+  deviceKeyWords.push(device.line.id);
+
+  // product
+  deviceKeyWords.push(device.product.name);
+  deviceKeyWords.push(device.product.abbrev);
+
+  // shortnames
+  device.shortnames.map((word) => deviceKeyWords.push(word));
+
+  // triplets
+  device.triplets.forEach((triplet) => {
+    Object.keys(triplet).forEach((tripletKey) => {
+      deviceKeyWords.push(triplet[tripletKey]);
+    });
+  });
+
+  return getTranslateDeviceKeyWords(deviceKeyWords);
+};
+
+const getTranslateDeviceKeyWords = (keyWords: string[]): string[] => {
+  const deviceSplitKeyWords = keyWords.reduce<string[]>(
+    (splitKeyWords, word) => {
+      const lowerCaseWord = word.toLowerCase();
+      const wordStrings = getSplitKeyWord(lowerCaseWord);
+
+      return [...splitKeyWords, ...wordStrings, lowerCaseWord];
+    },
+    []
+  );
+
+  return getUniqueKeywords(deviceSplitKeyWords);
+};
+
+const getSplitKeyWord = (text: string): string[] => text.split(" ");
+
+const getUniqueKeywords = (keywords: string[]): string[] => {
+  let unique: string[] = [];
+  keywords.forEach((keyword) => {
+    if (!unique.includes(keyword)) {
+      unique.push(keyword);
+    }
+  });
+
+  return unique;
+};
