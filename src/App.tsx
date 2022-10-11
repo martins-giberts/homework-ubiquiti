@@ -1,15 +1,40 @@
-import React from "react";
+import React, { useState } from "react";
 import logo from "./logo.svg";
 import { Counter } from "./features/counter/Counter";
 import "./App.css";
-import { useGetProductsQuery } from "./services/api";
+import { Device, useGetProductsQuery } from "./services/api";
 import { Wrapper, WrapperTypes } from "./components/Wrapper";
 import { Loading } from "./components/Loading";
 import { ErrorMessage } from "./components/ErrorMessage";
 import { ProductsGrid } from "./components/ProductsGrid";
 
 function App() {
+  const [searchQuery, setSearchQuery] = useState("");
   const { error, isLoading, data } = useGetProductsQuery();
+
+  const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchQuery(event.target.value);
+  };
+
+  const filterDevice = (device: Device) => {
+    const sanitizeQuery = searchQuery.trim().toLowerCase();
+    if (!sanitizeQuery) {
+      return true;
+    }
+
+    // Get words
+    const keys = device.product.name.toLowerCase().split(" ");
+
+    if (
+      keys
+        .map((keyWord) => keyWord.match(sanitizeQuery))
+        .filter((match) => !!match === true).length > 0
+    ) {
+      return true;
+    }
+
+    return false;
+  };
 
   return (
     <>
@@ -18,8 +43,18 @@ function App() {
       >
         {!error && isLoading && <Loading />}
         {error && <ErrorMessage error={error} />}
+        <label>
+          Search
+          <input
+            value={searchQuery}
+            placeholder="Search..."
+            onChange={handleSearch}
+          />
+          <button>Search</button>
+          <button onClick={() => setSearchQuery("")}>Clear</button>
+        </label>
         <ProductsGrid>
-          {data?.devices.map((device) => (
+          {data?.devices.filter(filterDevice).map((device) => (
             <div key={`${device.product.name}_${device.shortnames.join("-")}`}>
               <img
                 src={`${process.env.REACT_APP_ICON_URL}/${device.icon.id}_25x25.png`}
