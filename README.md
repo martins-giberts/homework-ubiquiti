@@ -4,18 +4,18 @@ Homework task for Ubiquiti based on Create React App (CRA) with Redux and Typesc
 
 - [Requirements](./docs/homework-requirements.md)
 
+## Preconditions
+
+- Node v16 or newer
+- npm v8.15 or newer
+
 ## Setup
 
 - Git clone for example SSH `git clone git@github.com:martins-giberts/homework-ubiquiti.git && cd homework-ubiquiti`
 - Open `homework-ubiquiti` on your favorite code editor
 - Copy [.env.example](./.env.example) to `.env`
 - Update `REACT_APP_API_ENDPOINT` and `REACT_APP_ICON_URL`
-
-## Preconditions
-
-- Node v16 or newer
-- npm v8.15 or newer
-- `npm install`
+- Install dependencies `npm install`
 
 ## Run the App
 
@@ -44,6 +44,16 @@ All tokens used for design or client-side configuration.
 In proper setup this would work as a central reference from externally imported tokens Figma, Zeroheight, others
 
 ## Description
+
+![Screenshot](./docs/screenshot.png)
+
+A small sample app built around API call that returns devices from catalogue. Displays list/grid of devices and allows to search by using available pre-determined values.
+
+Stack picked for ease of use, template was out-of-the-box Redux that was adjusted to support API data and search.
+
+Styled Components were selected for design elements because of easy setup, simple way to utilize best of both worlds - JavaScript and CSS.
+
+Example of tokens were added to display how larger scope of design sync could be ran. Usually tokens and basic Design components would be provided by internal package, with a pipeline to extract tokens from design tools. Allowing Designers and Developers to speak same language.
 
 ## Stack
 
