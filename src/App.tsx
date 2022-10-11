@@ -2,49 +2,20 @@ import React from "react";
 import logo from "./logo.svg";
 import { Counter } from "./features/counter/Counter";
 import "./App.css";
-import { Device, useGetProductsQuery } from "./services/api";
+import { useGetProductsQuery } from "./services/api";
 import { Wrapper, WrapperTypes } from "./components/Wrapper";
 import { Loading } from "./components/Loading";
 import { ErrorMessage } from "./components/ErrorMessage";
 import { ProductsGrid } from "./components/ProductsGrid";
-import { useAppDispatch, useAppSelector } from "./app/hooks";
-import {
-  searchQuery,
-  clearQueryInput,
-  selectSearchQueryInput,
-} from "./features/search/searchSlice";
+import { useDeviceSearch } from "./hooks/useDeviceSearch";
 
 function App() {
-  const searchQueryInput = useAppSelector(selectSearchQueryInput);
-  const dispatch = useAppDispatch();
   const { error, isLoading, data } = useGetProductsQuery();
+  const { onClearSearch, onSearch, searchFilter, searchQueryInput } =
+    useDeviceSearch();
 
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
-    dispatch(searchQuery(event.target.value));
-  };
-
-  const filterDevice = (device: Device) => {
-    const sanitizeQuery = searchQueryInput
-      .replace(/[\\.+*?^$[\](){}/'#:!=|]/gi, "\\$&")
-      .trim()
-      .toLowerCase();
-
-    if (!sanitizeQuery) {
-      return true;
-    }
-
-    // Get words
-    const keys = getDeviceKeys(device);
-
-    if (
-      keys
-        .map((keyWord) => keyWord.match(sanitizeQuery))
-        .filter((match) => !!match === true).length > 0
-    ) {
-      return true;
-    }
-
-    return false;
+    onSearch(event.target.value);
   };
 
   return (
@@ -55,24 +26,22 @@ function App() {
         {!error && isLoading && <Loading />}
         {error && <ErrorMessage error={error} />}
         <label>
-          Search
           <input
             value={searchQueryInput}
             placeholder="Search..."
             onChange={handleSearch}
           />
-          <button>Search</button>
-          <button onClick={() => dispatch(clearQueryInput())}>Clear</button>
+          <button onClick={() => onClearSearch()}>Clear</button>
         </label>
         <ProductsGrid>
-          {data?.devices.filter(filterDevice).map((device) => (
-            <div key={`${device.product.name}_${device.shortnames.join("-")}`}>
+          {data?.devices.filter(searchFilter).map((device) => (
+            <div key={`${device.device_id}`}>
               <img
                 src={`${process.env.REACT_APP_ICON_URL}/${device.icon.id}_25x25.png`}
                 alt={`product ${device.product.name} icon`}
               />
-              <span>{device.line.name}</span> |{" "}
-              <span>{device.product.name}</span>
+              <span>{device.device_id}</span> | <span>{device.line.name}</span>{" "}
+              | <span>{device.product.name}</span>
             </div>
           ))}
         </ProductsGrid>
@@ -133,53 +102,3 @@ const Demo: React.FC = () => (
     </span>
   </header>
 );
-
-const getDeviceKeys = (device: Device): string[] => {
-  const deviceKeyWords = [];
-  // line
-  deviceKeyWords.push(device.line.name);
-  deviceKeyWords.push(device.line.id);
-
-  // product
-  deviceKeyWords.push(device.product.name);
-  deviceKeyWords.push(device.product.abbrev);
-
-  // shortnames
-  device.shortnames.map((word) => deviceKeyWords.push(word));
-
-  // triplets
-  device.triplets.forEach((triplet) => {
-    Object.keys(triplet).forEach((tripletKey) => {
-      deviceKeyWords.push(triplet[tripletKey]);
-    });
-  });
-
-  return getTranslateDeviceKeyWords(deviceKeyWords);
-};
-
-const getTranslateDeviceKeyWords = (keyWords: string[]): string[] => {
-  const deviceSplitKeyWords = keyWords.reduce<string[]>(
-    (splitKeyWords, word) => {
-      const lowerCaseWord = word.toLowerCase();
-      const wordStrings = getSplitKeyWord(lowerCaseWord);
-
-      return [...splitKeyWords, ...wordStrings, lowerCaseWord];
-    },
-    []
-  );
-
-  return getUniqueKeywords(deviceSplitKeyWords);
-};
-
-const getSplitKeyWord = (text: string): string[] => text.split(" ");
-
-const getUniqueKeywords = (keywords: string[]): string[] => {
-  let unique: string[] = [];
-  keywords.forEach((keyword) => {
-    if (!unique.includes(keyword)) {
-      unique.push(keyword);
-    }
-  });
-
-  return unique;
-};

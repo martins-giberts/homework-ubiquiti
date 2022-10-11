@@ -2,6 +2,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export type Device = {
   sysids: string[];
+  device_id: string;
   icon: {
     resolutions: [number, number][];
     id: string;
@@ -15,8 +16,9 @@ export type Device = {
     abbrev: string;
   };
   shortnames: string[];
-  triplets: [{ [key: string]: string }];
+  triplets: { [key: string]: string }[];
   sysid?: string;
+  guids: string[];
 };
 
 export type Api = {

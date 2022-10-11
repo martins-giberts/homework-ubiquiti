@@ -1,5 +1,12 @@
 {
-  "cSpell.words": ["Lato", "shortnames", "sysid", "sysids", "UBIQUITI"],
+  "cSpell.words": [
+    "guids",
+    "Lato",
+    "shortnames",
+    "sysid",
+    "sysids",
+    "UBIQUITI"
+  ],
   "folderTemplates.structures": [
     {
       "name": "Simple Component Template",
