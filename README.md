@@ -62,3 +62,4 @@ In proper setup this would work as a central reference from externally imported 
 - Possible caching and cache busting by using API version entry
 - Search improvement - have searchable keywords prepared right after the fetch for performance benefit.
 - Secrets/Vault support for environment variables
+- Set Search Bar as Sticky

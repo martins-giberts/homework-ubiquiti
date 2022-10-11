@@ -8,15 +8,11 @@ import { Loading } from "./components/Loading";
 import { ErrorMessage } from "./components/ErrorMessage";
 import { ProductsGrid } from "./components/ProductsGrid";
 import { useDeviceSearch } from "./hooks/useDeviceSearch";
+import { SearchBar } from "./components/SearchBar";
 
 function App() {
   const { error, isLoading, data } = useGetProductsQuery();
-  const { onClearSearch, onSearch, searchFilter, searchQueryInput } =
-    useDeviceSearch();
-
-  const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
-    onSearch(event.target.value);
-  };
+  const { searchFilter } = useDeviceSearch();
 
   return (
     <>
@@ -25,26 +21,24 @@ function App() {
       >
         {!error && isLoading && <Loading />}
         {error && <ErrorMessage error={error} />}
-        <label>
-          <input
-            value={searchQueryInput}
-            placeholder="Search..."
-            onChange={handleSearch}
-          />
-          <button onClick={() => onClearSearch()}>Clear</button>
-        </label>
-        <ProductsGrid>
-          {data?.devices.filter(searchFilter).map((device) => (
-            <div key={`${device.device_id}`}>
-              <img
-                src={`${process.env.REACT_APP_ICON_URL}/${device.icon.id}_25x25.png`}
-                alt={`product ${device.product.name} icon`}
-              />
-              <span>{device.device_id}</span> | <span>{device.line.name}</span>{" "}
-              | <span>{device.product.name}</span>
-            </div>
-          ))}
-        </ProductsGrid>
+        {!error && !isLoading && (
+          <>
+            <SearchBar />
+            <ProductsGrid>
+              {data?.devices.filter(searchFilter).map((device) => (
+                <div key={`${device.device_id}`}>
+                  <img
+                    src={`${process.env.REACT_APP_ICON_URL}/${device.icon.id}_25x25.png`}
+                    alt={`product ${device.product.name} icon`}
+                  />
+                  <span>{device.device_id}</span> |{" "}
+                  <span>{device.line.name}</span> |{" "}
+                  <span>{device.product.name}</span>
+                </div>
+              ))}
+            </ProductsGrid>
+          </>
+        )}
       </Wrapper>
       <div className="App">
         <Demo />
