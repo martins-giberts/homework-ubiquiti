@@ -13,6 +13,8 @@ const mediaTokens = {
   tabletWidth: 768,
   desktopWidth: 1024,
   desktopLargeWidth: 1440,
+  imageWidth: 257,
+  imageHeight: 257,
 };
 
 const mediaTokensPx = {
@@ -48,7 +50,7 @@ const spacingPx = {
 const colors = {
   colorUiLightBlue: "#00a0df",
   colorUiDarkBlue: "#003656",
-  colorUiLightGrey: "#f6f6f8",
+  colorUiLightGrey: "#f8f8f8",
   colorUiGrey: "#7f7f7f",
   colorWhite: "#fff",
   colorBlack: "#000",
