@@ -63,3 +63,4 @@ In proper setup this would work as a central reference from externally imported 
 - Search improvement - have searchable keywords prepared right after the fetch for performance benefit.
 - Secrets/Vault support for environment variables
 - Set Search Bar as Sticky
+- When search has no results - display "no results found" message

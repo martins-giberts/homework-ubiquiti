@@ -1,12 +1,10 @@
 import { configureStore, ThunkAction, Action } from "@reduxjs/toolkit";
-import counterReducer from "../features/counter/counterSlice";
 import { api } from "../services/api";
 import { setupListeners } from "@reduxjs/toolkit/query";
 import { searchSlice } from "../features/search/searchSlice";
 
 export const store = configureStore({
   reducer: {
-    counter: counterReducer,
     search: searchSlice.reducer,
     [api.reducerPath]: api.reducer,
   },
