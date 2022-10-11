@@ -38,8 +38,29 @@ Open [http://localhost:6006/](http://localhost:6006/)
 
 Note: Not compatible with npm8 at the time of installation. Uses legacy npm7 setup.
 
+### [Tokens](./src/tokens.ts)
+
+All tokens used for design or client-side configuration.
+In proper setup this would work as a central reference from externally imported tokens Figma, Zeroheight, others
+
 ## Description
 
 ## Stack
 
 - [Create React App](./docs/create-react-app.md)
+- [Styled Components](https://styled-components.com/)
+- [StoryBook](https://storybook.js.org/)
+- [Google Fonts - Lato](https://fonts.google.com/specimen/Lato)
+- [Folder Templates](https://marketplace.visualstudio.com/items?itemName=Huuums.vscode-fast-folder-structure)
+
+## Nice to Have improvements
+
+- URL Query support, have query parameters to reflect users navigation
+  - Device deep link support
+- Devices Tabs by using Device Line data
+- Favorite devices list by using either Cookies or local storage
+- Possible caching and cache busting by using API version entry
+- Search improvement - have searchable keywords prepared right after the fetch for performance benefit.
+- Secrets/Vault support for environment variables
+- Set Search Bar as Sticky
+- When search has no results - display "no results found" message

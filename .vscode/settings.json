@@ -1,5 +1,149 @@
 {
   "cSpell.words": [
+    "guids",
+    "Lato",
+    "shortnames",
+    "sysid",
+    "sysids",
     "UBIQUITI"
-  ]
+  ],
+  "folderTemplates.structures": [
+    {
+      "name": "Simple Component Template",
+      "overwriteExistingFiles": "prompt",
+      "structure": [
+        {
+          "fileName": "<FTName>.tsx",
+          "template": "Component"
+        },
+        {
+          "fileName": "<FTName>.test.tsx",
+          "template": "Component Test"
+        },
+        {
+          "fileName": "<FTName>.stories.tsx",
+          "template": "Component Story"
+        },
+        {
+          "fileName": "index.ts",
+          "template": "Component Index"
+        }
+      ]
+    },
+    {
+      "name": "Component with props Template",
+      "overwriteExistingFiles": "prompt",
+      "structure": [
+        {
+          "fileName": "<FTName>.tsx",
+          "template": "Component with props"
+        },
+        {
+          "fileName": "<FTName>.test.tsx",
+          "template": "Component Test"
+        },
+        {
+          "fileName": "<FTName>.stories.tsx",
+          "template": "Component Story"
+        },
+        {
+          "fileName": "index.ts",
+          "template": "Component Index"
+        }
+      ]
+    },
+    {
+      "name": "React Hook",
+      "overwriteExistingFiles": "prompt",
+      "omitParentDirectory": true,
+      "structure": [
+        {
+          "fileName": "use<FTName>.ts",
+          "template": "React Hook"
+        },
+        {
+          "fileName": "use<FTName>.test.ts",
+          "template": "React Hook Test"
+        }
+      ]
+    }
+  ],
+  "folderTemplates.fileTemplates": {
+    "Component": [
+      "import styled from \"styled-components\";",
+      "",
+      "export const <FTName>: React.FC = () => <Container><FTName></Container>;",
+      "",
+      "const Container = styled.div`",
+      "  padding: 20px;",
+      "  border: 1px dashed red;",
+      "`;"
+    ],
+    "Component with props": [
+      "import styled from \"styled-components\";",
+      "",
+      "export type <FTName>Props = {",
+      "  name: string;",
+      "  flag: boolean;",
+      "};",
+      "",
+      "export const <FTName>: React.FC<<FTName>Props> = ({ name, flag }) =>",
+      "  flag ? <Container>{name}</Container> : null;",
+      "",
+      "const Container = styled.div`",
+      "  padding: 20px;",
+      "  border: 1px dashed red;",
+      "`;"
+    ],
+    "Component Test": [
+      "import { render, screen } from \"@testing-library/react\";",
+      "import { <FTName> } from \"./<FTName>\";",
+      "",
+      "describe(\"<FTName>\", () => {",
+      "  it(\"renders component\", () => {",
+      "    render(<<FTName> />);",
+      "    expect(screen.getByText(\"<FTName>\")).toBeInTheDocument();",
+      "  });",
+      "});"
+    ],
+    "Component Story": [
+      "import { ComponentMeta, ComponentStory } from \"@storybook/react\";",
+      "import { <FTName> } from \"./<FTName>\";",
+      "",
+      "export default {",
+      "  title: \"Components/<FTName>\",",
+      "  component: <FTName>,",
+      "} as ComponentMeta<typeof <FTName>>;",
+      "",
+      "const Template: ComponentStory<typeof <FTName>> = (args) => <<FTName> {...args} />;",
+      "",
+      "export const Default = Template.bind({});",
+      "Default.args = {};"
+    ],
+    "Component Index": "export * from \"./<FTName>\";",
+    "React Hook": [
+      "import { useEffect, useState } from \"react\";",
+      "",
+      "export const use<FTName> = () => {",
+      "  const [state, setState] = useState<string>(\"initial\");",
+      "",
+      "  useEffect(() => {",
+      "    setState(\"effect\");",
+      "  }, []);",
+      "",
+      "  return state;",
+      "};"
+    ],
+    "React Hook Test": [
+      "import { renderHook } from \"@testing-library/react\";",
+      "import { use<FTName> } from \"./use<FTName>\";",
+      "",
+      "describe(\"use<FTName>\", () => {",
+      "  it(\"runs hook without errors\", () => {",
+      "    const { result } = renderHook(use<FTName>);",
+      "    expect(result.current).toBe(\"effect\");",
+      "  });",
+      "});"
+    ]
+  }
 }
