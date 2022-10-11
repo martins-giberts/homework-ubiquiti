@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import logo from "./logo.svg";
 import { Counter } from "./features/counter/Counter";
 import "./App.css";
@@ -7,17 +7,24 @@ import { Wrapper, WrapperTypes } from "./components/Wrapper";
 import { Loading } from "./components/Loading";
 import { ErrorMessage } from "./components/ErrorMessage";
 import { ProductsGrid } from "./components/ProductsGrid";
+import { useAppDispatch, useAppSelector } from "./app/hooks";
+import {
+  searchQuery,
+  clearQueryInput,
+  selectSearchQueryInput,
+} from "./features/search/searchSlice";
 
 function App() {
-  const [searchQuery, setSearchQuery] = useState("");
+  const searchQueryInput = useAppSelector(selectSearchQueryInput);
+  const dispatch = useAppDispatch();
   const { error, isLoading, data } = useGetProductsQuery();
 
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchQuery(event.target.value);
+    dispatch(searchQuery(event.target.value));
   };
 
   const filterDevice = (device: Device) => {
-    const sanitizeQuery = searchQuery
+    const sanitizeQuery = searchQueryInput
       .replace(/[\\.+*?^$[\](){}/'#:!=|]/gi, "\\$&")
       .trim()
       .toLowerCase();
@@ -50,12 +57,12 @@ function App() {
         <label>
           Search
           <input
-            value={searchQuery}
+            value={searchQueryInput}
             placeholder="Search..."
             onChange={handleSearch}
           />
           <button>Search</button>
-          <button onClick={() => setSearchQuery("")}>Clear</button>
+          <button onClick={() => dispatch(clearQueryInput())}>Clear</button>
         </label>
         <ProductsGrid>
           {data?.devices.filter(filterDevice).map((device) => (
