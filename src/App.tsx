@@ -3,36 +3,26 @@ import logo from "./logo.svg";
 import { Counter } from "./features/counter/Counter";
 import "./App.css";
 import { useGetProductsQuery } from "./services/api";
-import { Wrapper, WrapperTypes } from "./components/Wrapper";
-import { Loading } from "./components/Loading";
-import { ErrorMessage } from "./components/ErrorMessage";
 import { ProductsGrid } from "./components/ProductsGrid";
 import { useDeviceSearch } from "./hooks/useDeviceSearch";
 import { SearchBar } from "./components/SearchBar";
 import { ProductCard } from "./components/ProductCard";
+import { AppWrapper } from "./AppWrapper";
 
 function App() {
-  const { error, isLoading, data } = useGetProductsQuery();
+  const { data } = useGetProductsQuery();
   const { searchFilter } = useDeviceSearch();
 
   return (
     <>
-      <Wrapper
-        wrapperType={isLoading || error ? WrapperTypes.FullScreen : undefined}
-      >
-        {!error && isLoading && <Loading />}
-        {error && <ErrorMessage error={error} />}
-        {!error && !isLoading && (
-          <>
-            <SearchBar />
-            <ProductsGrid>
-              {data?.devices.filter(searchFilter).map((device) => (
-                <ProductCard key={`${device.device_id}`} device={device} />
-              ))}
-            </ProductsGrid>
-          </>
-        )}
-      </Wrapper>
+      <AppWrapper>
+        <SearchBar />
+        <ProductsGrid>
+          {data?.devices.filter(searchFilter).map((device) => (
+            <ProductCard key={`${device.device_id}`} device={device} />
+          ))}
+        </ProductsGrid>
+      </AppWrapper>
       <div className="App">
         <Demo />
       </div>
