@@ -10,7 +10,7 @@ export const Devices: React.FC = () => {
   return (
     <ProductsGrid>
       {data?.devices.filter(searchFilter).map((device) => (
-        <ProductCard key={`${device.device_id}`} device={device} />
+        <ProductCard key={device.device_id} device={device} />
       ))}
     </ProductsGrid>
   );
